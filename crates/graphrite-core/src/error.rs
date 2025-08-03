@@ -11,7 +11,7 @@ pub struct Span { pub start: Position, pub end: Position }
 pub struct Diagnostic {
     pub code: String,
     pub message: String,
-    pub span: Option<Span>,
+    pub span: Option<crate::ast::Span>,
 }
 
 #[derive(Debug, Error)]
