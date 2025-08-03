@@ -8,6 +8,7 @@ direction LR
 
 a["A"]
 b["B"]
+a --> b
 "#;
     let doc = Parser::parse(src).expect("parse");
     assert_eq!(doc.directives.direction as u8, graphrite_core::ast::Direction::LR as u8);
@@ -24,13 +25,14 @@ fn errors_without_direction() {
 }
 
 #[test]
-fn ignores_edges_for_now() {
+fn edges_validate_presence() {
     let src = r#"direction LR
 
 a["A"]
-A --> B
+a --> b
 b["B"]
 "#;
     let doc = Parser::parse(src).expect("parse");
     assert_eq!(doc.nodes.len(), 2);
+    assert_eq!(doc.edges.len(), 1);
 }
