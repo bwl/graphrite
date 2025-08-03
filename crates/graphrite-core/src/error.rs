@@ -2,10 +2,16 @@ use serde::{Deserialize, Serialize};
 use thiserror::Error;
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
-pub struct Position { pub line: usize, pub col: usize }
+pub struct Position {
+    pub line: usize,
+    pub col: usize,
+}
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
-pub struct Span { pub start: Position, pub end: Position }
+pub struct Span {
+    pub start: Position,
+    pub end: Position,
+}
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
 pub struct Diagnostic {

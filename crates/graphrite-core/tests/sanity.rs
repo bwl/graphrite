@@ -11,7 +11,10 @@ b["B"]
 a --> b
 "#;
     let doc = Parser::parse(src).expect("parse");
-    assert_eq!(doc.directives.direction as u8, graphrite_core::ast::Direction::LR as u8);
+    assert_eq!(
+        doc.directives.direction as u8,
+        graphrite_core::ast::Direction::LR as u8
+    );
     assert_eq!(doc.nodes.len(), 2);
     assert_eq!(doc.nodes[0].id, "a");
     assert_eq!(doc.nodes[1].label, "B");
