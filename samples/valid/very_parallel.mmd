@@ -1,0 +1,35 @@
+%% Diagram: Very Parallel (expanded)
+
+direction LR
+
+ingest["Ingest"]
+precheck["Precheck"]
+router["Router"]
+proc_a["Proc A"]
+proc_b["Proc B"]
+proc_c["Proc C"]
+proc_d["Proc D"]
+proc_e["Proc E"]
+proc_f["Proc F"]
+merge1["Merge 1"]
+merge2["Merge 2"]
+finalize["Finalize"]
+out["Out"]
+
+ingest --> precheck
+precheck --> router
+router --> proc_a
+router --> proc_b
+router --> proc_c
+router --> proc_d
+router --> proc_e
+router --> proc_f
+proc_a --> merge1
+proc_b --> merge1
+proc_c --> merge1
+proc_d --> merge2
+proc_e --> merge2
+proc_f --> merge2
+merge1 --> finalize
+merge2 --> finalize
+finalize --> out

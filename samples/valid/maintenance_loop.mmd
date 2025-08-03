@@ -1,0 +1,27 @@
+%% Diagram: Maintenance Loop (expanded)
+
+direction LR
+
+monitor["Monitor"]
+alert["Alert"]
+classify["Classify"]
+triage["Triage"]
+assign["Assign"]
+fix["Fix"]
+review["Review"]
+verify["Verify"]
+release["Release"]
+postmortem["Postmortem"]
+backlog["Backlog"]
+
+monitor --> alert
+alert --> classify
+classify --> triage
+triage --> assign
+assign --> fix
+fix --> review
+review --> verify
+verify --> release
+release --> postmortem
+postmortem --> backlog
+backlog --> monitor

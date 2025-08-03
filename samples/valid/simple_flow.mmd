@@ -1,0 +1,30 @@
+%% Diagram: Simple Flow (expanded)
+
+direction LR
+
+start["Start"]
+validate["Validate Input"]
+queue["Queue"]
+worker1["Worker 1"]
+worker2["Worker 2"]
+process["Process"]
+store["Store"]
+notify["Notify"]
+archive["Archive"]
+metrics["Metrics"]
+end_success["Success"]
+end_fail["Fail"]
+
+start --> validate
+validate --> queue
+queue --> worker1
+queue --> worker2
+worker1 --> process
+worker2 --> process
+process --> store
+process --> notify
+store --> archive
+store --> metrics
+notify --> end_success
+archive --> end_success
+validate --> end_fail
