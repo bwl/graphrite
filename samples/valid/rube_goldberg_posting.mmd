@@ -1,0 +1,50 @@
+%% Diagram: Rube Goldberg Message Posting
+%% Meta: type=workflow; domain=social
+
+direction LR
+
+start["User taps Post"] --> a1["Draft Created"]
+a1 --> b1{"Spellcheck OK?"}
+b1 -- yes --> c1["Attach Media?"]
+b1 -- no --> a1
+
+c1 -- yes --> d1["Compress Media"]
+d1 --> e1{"Too Large?"}
+e1 -- yes --> d1
+e1 -- no --> f1["Encrypt Media"]
+c1 -- no --> f1
+
+f1 --> g1["Sign Request"]
+g1 --> h1{"Token Valid?"}
+h1 -- no --> i1["Refresh Token"] --> g1
+h1 -- yes --> j1["Send to PDS"]
+
+j1 --> k1{"PDS Busy?"}
+k1 -- yes --> l1["Backoff 100ms"] --> j1
+k1 -- no --> m1["Persist Record"]
+
+m1 --> n1["Emit Event"]
+n1 --> o1["Relay Queue"]
+o1 --> p1{"Fanout Budget?"}
+p1 -- exhausted --> q1["Defer Batch"] --> o1
+p1 -- available --> r1["Notify Followers"]
+
+r1 --> s1{"Push Success?"}
+s1 -- partial --> t1["Retry Exponential"] --> r1
+s1 -- fail --> u1["Dead Letter"] --> v1["Alert Ops"]
+s1 -- success --> w1["Ack Delivery"]
+
+w1 --> x1{"Moderation Flags?"}
+x1 -- yes --> y1["Quarantine"] --> z1["Human Review"] --> aa1["Decision"]
+aa1 -- approve --> ab1["Release"] --> ac1["Index Search"]
+aa1 -- reject --> ad1["Tombstone"] --> ac1
+x1 -- no --> ac1
+
+ac1 --> ae1["Update Feeds"]
+ae1 --> af1{"Hot Content?"}
+af1 -- yes --> ag1["Precompute Cards"] --> ah1["Pin to Trending"]
+af1 -- no --> ai1["Background Recalc"]
+
+ah1 --> end1["Done"]
+ai1 --> end1
+v1 --> end1

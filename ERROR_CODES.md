@@ -1,0 +1,17 @@
+# Graphrite Error Codes (Draft)
+
+E0001 MissingDirectionFirstLine
+E0002 InvalidIdentifierCase
+E0003 UnquotedMultiwordLabel
+E0004 InconsistentEdgeSemantics
+E0005 DanglingEdge
+E0006 OrphanNode
+E0007 InlineCommentDisallowed
+E0008 ExceedsMaxLineLength
+E0009 MixedDiagramTypes
+E0010 OptionalSyntaxUsed
+E0011 MissingDiagramHeader
+E0012 InvalidMetadataTag
+E0013 InvalidArrowSpacing
+E0014 DuplicateNodeId
+E0015 UnknownDirective

@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/graphrite.schema.json",
+  "title": "Graphrite AST v1",
+  "type": "object",
+  "required": ["version", "directives", "nodes", "edges"],
+  "properties": {
+    "version": {"type": "string", "const": "1"},
+    "directives": {
+      "type": "object",
+      "required": ["direction"],
+      "properties": {
+        "direction": {"type": "string", "enum": ["LR", "TD"]}
+      },
+      "additionalProperties": false
+    },
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "title": {"type": "string"},
+        "tags": {"type": "object", "additionalProperties": {"type": "string"}}
+      },
+      "additionalProperties": false
+    },
+    "nodes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "label"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"},
+          "label": {"type": "string"},
+          "span": {"$ref": "#/definitions/span"}
+        },
+        "additionalProperties": false
+      }
+    },
+    "edges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["from", "to", "kind"],
+        "properties": {
+          "from": {"type": "string"},
+          "to": {"type": "string"},
+          "kind": {"type": "string", "enum": ["flow", "conditional"]},
+          "span": {"$ref": "#/definitions/span"}
+        },
+        "additionalProperties": false
+      }
+    },
+    "sourceSpans": {
+      "type": "object",
+      "additionalProperties": {"$ref": "#/definitions/span"}
+    }
+  },
+  "definitions": {
+    "span": {
+      "type": "object",
+      "required": ["start", "end"],
+      "properties": {
+        "start": {"type": "object", "required": ["line", "col"], "properties": {"line": {"type": "integer", "minimum": 1}, "col": {"type": "integer", "minimum": 1}}},
+        "end": {"type": "object", "required": ["line", "col"], "properties": {"line": {"type": "integer", "minimum": 1}, "col": {"type": "integer", "minimum": 1}}}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

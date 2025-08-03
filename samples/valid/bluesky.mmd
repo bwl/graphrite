@@ -1,0 +1,38 @@
+%% Diagram: Bluesky-style federated microblogging service
+%% Meta: type=architecture; domain=social; version=1
+
+direction LR
+
+user_app["Mobile/Web Client"]
+pds_api["Personal Data Server (PDS)"]
+relay["Relay/Message Broker"]
+plc_dir["Identity PLC Directory"]
+repo_store["Repo/Record Store"]
+atproto["ATProto Protocol Layer"]
+feed_gen["Feed Generator Service"]
+graph_svc["Social Graph Service"]
+moderation["Moderation Service"]
+blob_store["Blob/Media Store"]
+search["Search/Indexing Service"]
+firehose["Firehose Stream"]
+federation["Federation Gateway"]
+third_pds["Third-Party PDS"]
+
+user_app -->|HTTPS| pds_api
+pds_api -->|ATProto| atproto
+atproto --> repo_store
+atproto --> relay
+atproto --> plc_dir
+
+pds_api --> blob_store
+pds_api --> feed_gen
+pds_api --> graph_svc
+pds_api --> moderation
+
+relay --> firehose
+firehose --> search
+firehose --> feed_gen
+firehose --> moderation
+
+federation -->|XRPC/ATProto| third_pds
+pds_api --> federation

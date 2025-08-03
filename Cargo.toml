@@ -1,0 +1,6 @@
+[workspace]
+members = [
+  "crates/graphrite-core",
+  "crates/graphrite-cli",
+]
+resolver = "2"
