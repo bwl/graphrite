@@ -18,3 +18,4 @@ Cargo.lock
 .crush
 mermaid
 mermaid-cli
+.plan/

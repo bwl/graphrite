@@ -1,8 +1,8 @@
 # Getting Started with Graphrite
 
 Install
-- Ensure Rust toolchain installed
-- Build: cargo build
+- Rust toolchain: cargo build
+- Or download a prebuilt binary from Releases (when available) and put it on PATH
 
 Quick start
 1) Create a file sample.mmd
@@ -13,21 +13,20 @@ Quick start
    a --> b
 
 2) Validate
-   cargo run -p graphrite-cli -- check sample.mmd
+   graphrite check sample.mmd
 
 3) Print AST
-   cargo run -p graphrite-cli -- parse sample.mmd
+   graphrite parse sample.mmd
 
 4) Lint (human or JSON)
-   cargo run -p graphrite-cli -- lint --pretty sample.mmd
-   cargo run -p graphrite-cli -- lint --diag-json sample.mmd
+   graphrite lint --pretty sample.mmd
+   graphrite lint --diag-json sample.mmd
 
 5) Format (identity for now)
-   cargo run -p graphrite-cli -- fmt --check sample.mmd
+   graphrite fmt --check sample.mmd
 
-6) Render to DOT and SVG
-   cargo run -p graphrite-cli -- render --format dot sample.mmd > sample.dot
-   cat sample.dot | dot -Tsvg > sample.svg
+6) Render to SVG (built-in)
+   graphrite render --format svg sample.mmd > sample.svg
 
 Samples
-- Browse samples/valid/*.mmd
+- Browse samples/valid/*.mmd and samples/invalid/*.mmd
